@@ -5,13 +5,13 @@ dec2ascii:
     # prólogo
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $16, %rsp
+	subq $16, %rsp	# aloca 16 bytes para o frame 
 
 	# char *str em rsi
 
 	movl $10, %ecx
 
-	leaq -8(%rbp), %r8
+	leaq -16(%rbp), %r8
 	movl $0, %r9d		# inicializa contador de dígitos
 
 	cmpl $0, %edi
