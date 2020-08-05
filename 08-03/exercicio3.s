@@ -163,11 +163,13 @@ leitura_fim:
 	movq $0, %rax
 	call scanf
 
+    # chama a função polinomio
     movl -8(%rbp), %edx
     movl -4(%rbp), %esi
     leaq (%rsp), %rdi
     call polinomio
 
+    # imprime o resultado
     movl %eax, %edx
     movl -8(%rbp), %esi
 	movq $resultFmt, %rdi
