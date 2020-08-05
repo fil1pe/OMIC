@@ -4,7 +4,7 @@
 fatorial:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $16, %rsp  # aloca 16 bytes para o frame
 
     # se n <= 1, retorna 1
@@ -24,9 +24,9 @@ fatorial:
     mulq %rdi
 fatorial_fim:
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
     .section .rodata
 prompt:
@@ -41,19 +41,19 @@ printFmt:
 main:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $16, %rsp  # aloca 16 bytes para o frame
 
     # pede para o usuário digitar
-	movq $prompt, %rdi
-	movq $0, %rax
-	call printf
+    movq $prompt, %rdi
+    movq $0, %rax
+    call printf
 
     # lê n
     leaq -4(%rbp), %rsi
     movq $scanFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $0, %rax
+    call scanf
 
     # chama fatorial
     movl -4(%rbp), %edi
@@ -63,11 +63,11 @@ main:
     movq %rax, %rdx
     movq -4(%rbp), %rsi
     movq $printFmt, %rdi
-	movq $0, %rax
-	call printf
+    movq $0, %rax
+    call printf
 
     # epílogo
-	movq $0, %rax
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq $0, %rax
+    movq %rbp, %rsp
+    popq %rbp
+    ret

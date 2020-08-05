@@ -14,24 +14,24 @@ resultFmt:
 main:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $16, %rsp  # aloca 16 bytes para o frame
 
     # pede para o usuário digitar
-	movq $prompt, %rdi
-	movq $0, %rax
-	call printf
+    movq $prompt, %rdi
+    movq $0, %rax
+    call printf
 
     # lê a entrada do usuário
     leaq -4(%rbp), %rsi
-	movq $scanFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $scanFmt, %rdi
+    movq $0, %rax
+    call scanf
 
     # imprime o separador
-	movq $separador, %rdi
-	movq $0, %rax
-	call printf
+    movq $separador, %rdi
+    movq $0, %rax
+    call printf
 
     # abaixo chama a função imprime_cedulas e diminui do montante a qtde. já sacada
 
@@ -72,9 +72,9 @@ main:
 
     # epílogo
     movq $0, %rax
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
 
     .text
@@ -83,7 +83,7 @@ main:
 imprime_cedulas:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $16, %rsp  # aloca 16 bytes para o frame
 
     # divide o montante pelo valor da cédula
@@ -97,14 +97,14 @@ imprime_cedulas:
     # imprime o número de notas sendo o quociente acima
     movl %esi, %edx
     movl %eax, %esi
-	movq $resultFmt, %rdi
-	movq $0, %rax
-	call printf
+    movq $resultFmt, %rdi
+    movq $0, %rax
+    call printf
 
     # retorna o resto
     movl -4(%rbp), %eax
 
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret

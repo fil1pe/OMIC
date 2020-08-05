@@ -4,7 +4,7 @@
 substituir:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
 
 loop:
     # se for fim da string, sai do loop
@@ -23,80 +23,80 @@ nao_troca:
 
 fim:
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
 # constantes
-	.equ STDIN,0
-	.equ STDOUT,1
-	.equ READ,0
-	.equ WRITE,1
-	.equ EXIT,60
+    .equ STDIN,0
+    .equ STDOUT,1
+    .equ READ,0
+    .equ WRITE,1
+    .equ EXIT,60
 
     .section .rodata
 prompt:
-	.string "Digite uma string de até 50 caracteres: "
-	.equ promptSz, .-prompt-1
+    .string "Digite uma string de até 50 caracteres: "
+    .equ promptSz, .-prompt-1
 promptC1:
     .string "Digite um caractere a ser substituído: "
-	.equ promptC1Sz, .-promptC1-1
+    .equ promptC1Sz, .-promptC1-1
 promptC2:
     .string "Digite um caractere para substituir: "
-	.equ promptC2Sz, .-promptC2-1
+    .equ promptC2Sz, .-promptC2-1
 result:
     .string "=====\nResultado: "
-	.equ resultSz, .-result-1
+    .equ resultSz, .-result-1
 
     .text
-	.globl __start
+    .globl __start
 __start:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $64, %rsp  # aloca 64 bytes para o frame
 
     # pede para o usuario digitar
-	movq $promptSz, %rdx
-	movq $prompt, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $promptSz, %rdx
+    movq $prompt, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # lê a string
-	movq $51, %rdx
-	leaq -52(%rbp), %rsi
-	movq $STDIN, %rdi
-	movl $READ, %eax
-	syscall
+    movq $51, %rdx
+    leaq -52(%rbp), %rsi
+    movq $STDIN, %rdi
+    movl $READ, %eax
+    syscall
     
     # pede para o usuario digitar c1
-	movq $promptC1Sz, %rdx
-	movq $promptC1, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $promptC1Sz, %rdx
+    movq $promptC1, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # lê c1
-	movq $2, %rdx
-	leaq -55(%rbp), %rsi
-	movq $STDIN, %rdi
-	movl $READ, %eax
-	syscall
+    movq $2, %rdx
+    leaq -55(%rbp), %rsi
+    movq $STDIN, %rdi
+    movl $READ, %eax
+    syscall
 
     # pede para o usuario digitar c2
-	movq $promptC2Sz, %rdx
-	movq $promptC2, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $promptC2Sz, %rdx
+    movq $promptC2, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # lê c2
-	movq $2, %rdx
-	leaq -58(%rbp), %rsi
-	movq $STDIN, %rdi
-	movl $READ, %eax
-	syscall
+    movq $2, %rdx
+    leaq -58(%rbp), %rsi
+    movq $STDIN, %rdi
+    movl $READ, %eax
+    syscall
 
     # chama a função substituir
     movq -58(%rbp), %rdx
@@ -106,20 +106,20 @@ __start:
 
     # imprime a nova string
     movq $resultSz, %rdx
-	movq $result, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $result, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     movq $51, %rdx
-	leaq -52(%rbp), %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    leaq -52(%rbp), %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # epílogo
     movq %rbp, %rsp
-	popq %rbp
-	movq $0, %rdi
-	movl $EXIT, %eax
-	syscall
+    popq %rbp
+    movq $0, %rdi
+    movl $EXIT, %eax
+    syscall

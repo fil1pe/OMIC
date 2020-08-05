@@ -4,7 +4,7 @@
 polinomio:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $32, %rsp
 
     movq %rdi, -8(%rbp)     # salva o vetor
@@ -41,9 +41,9 @@ fim:
     movq -24(%rbp), %rax
 
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
     .section .rodata
 prompt:
@@ -62,19 +62,19 @@ resultFmt:
 main:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $16, %rsp  # aloca 16 bytes para o frame
 
     # pede para o usuário digitar
-	movq $prompt, %rdi
-	movq $0, %rax
-	call printf
+    movq $prompt, %rdi
+    movq $0, %rax
+    call printf
 
     # lê o número de coeficientes
     leaq -4(%rbp), %rsi
     movq $intFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $0, %rax
+    call scanf
 
     # salva um contador extra
     movl -4(%rbp), %eax
@@ -97,9 +97,9 @@ aloca:
     movq %rsi, -16(%rbp)
 
     # pede para o usuário digitar os coeficientes
-	movq $promptCoef, %rdi
-	movq $0, %rax
-	call printf
+    movq $promptCoef, %rdi
+    movq $0, %rax
+    call printf
     
 leitura:
     cmpl $0, -8(%rbp)
@@ -108,8 +108,8 @@ leitura:
     # lê o coeficiente
     movq -16(%rbp), %rsi
     movq $intFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $0, %rax
+    call scanf
 
     # aponta para o próximo coeficiente
     addq $4, -16(%rbp)
@@ -121,15 +121,15 @@ leitura:
 
 leitura_fim:
     # pede para o usuário digitar x
-	movq $promptX, %rdi
-	movq $0, %rax
-	call printf
+    movq $promptX, %rdi
+    movq $0, %rax
+    call printf
 
     # lê x
     leaq -8(%rbp), %rsi
     movq $intFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $0, %rax
+    call scanf
 
     # chama a função polinomio
     movl -8(%rbp), %edx
@@ -140,12 +140,12 @@ leitura_fim:
     # imprime o resultado
     movl %eax, %edx
     movl -8(%rbp), %esi
-	movq $resultFmt, %rdi
-	movq $0, %rax
-	call printf
+    movq $resultFmt, %rdi
+    movq $0, %rax
+    call printf
 
     # epílogo
     movq $0, %rax
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret

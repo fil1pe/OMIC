@@ -1,11 +1,11 @@
-	.text
-	.globl bin2dec
-	.type bin2dec, @function
+    .text
+    .globl bin2dec
+    .type bin2dec, @function
 bin2dec:
     # prólogo
-	pushq %rbp
-	movq %rsp, %rbp
-	subq $16, %rsp  # aloca 16 bytes na pilha
+    pushq %rbp
+    movq %rsp, %rbp
+    subq $16, %rsp  # aloca 16 bytes na pilha
 
     # obtém o índice do bit mais significativo
     movq %rdi, -16(%rbp)
@@ -44,17 +44,17 @@ fim:
     movl -8(%rbp), %eax # retorna o resultado
 
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
-	.text
-	.globl strlen
-	.type strlen, @function
+    .text
+    .globl strlen
+    .type strlen, @function
 strlen:
     # prólogo
-	pushq %rbp
-	movq %rsp, %rbp
+    pushq %rbp
+    movq %rsp, %rbp
 
     movl $0, %eax   # resultado
 strlen_loop:
@@ -68,17 +68,17 @@ strlen_loop:
     jmp strlen_loop
 
 strlen_epilogo:
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
     .text
-	.globl cleanstr
-	.type cleanstr, @function
+    .globl cleanstr
+    .type cleanstr, @function
 cleanstr:
     # prólogo
-	pushq %rbp
-	movq %rsp, %rbp
+    pushq %rbp
+    movq %rsp, %rbp
 
 cleanstr_loop:
     # enquanto n (em esi) não for zero, zere o caractere atual
@@ -90,16 +90,16 @@ cleanstr_loop:
     jmp cleanstr_loop
 
 cleanstr_epilogo:
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
 
 # constantes
-	.equ STDIN,0
-	.equ STDOUT,1
-	.equ READ,0
-	.equ WRITE,1
-	.equ EXIT,60
+    .equ STDIN,0
+    .equ STDOUT,1
+    .equ READ,0
+    .equ WRITE,1
+    .equ EXIT,60
 
     .section .rodata
 prompt:
@@ -109,31 +109,31 @@ teste:
     .string "100"
 result:
     .string "Em decimal: "
-	.equ resultSz, .-result-1
+    .equ resultSz, .-result-1
 newline:
     .string "\n"
 
     .text
-	.globl __start
+    .globl __start
 __start:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $48, %rsp  # aloca 48 bytes para o frame
 
     # pede para o usuário digitar
     movq $promptSz, %rdx
-	movq $prompt, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $prompt, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # lê a entrada do usuário
     movq $32, %rdx
-	leaq -32(%rbp), %rsi
-	movq $STDIN, %rdi
-	movl $READ, %eax
-	syscall
+    leaq -32(%rbp), %rsi
+    movq $STDIN, %rdi
+    movl $READ, %eax
+    syscall
 
     # chama a função bin2dec
     leaq -32(%rbp), %rdi
@@ -152,27 +152,27 @@ __start:
 
     # imprime o resultado
     movq $resultSz, %rdx
-	movq $result, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $result, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     movq $31, %rdx
-	leaq -32(%rbp), %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    leaq -32(%rbp), %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # pula linha
     movq $1, %rdx
-	movq $newline, %rsi
-	movq $STDOUT, %rdi
-	movl $WRITE, %eax
-	syscall
+    movq $newline, %rsi
+    movq $STDOUT, %rdi
+    movl $WRITE, %eax
+    syscall
 
     # epílogo
     movq %rbp, %rsp
-	popq %rbp
-	movq $0, %rdi
-	movl $EXIT, %eax
-	syscall
+    popq %rbp
+    movq $0, %rdi
+    movl $EXIT, %eax
+    syscall

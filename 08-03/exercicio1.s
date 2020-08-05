@@ -16,7 +16,7 @@ mediaNAFmt:
 main:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
     subq $32, %rsp  # aloca 32 bytes para o frame
 
     # salva o valor dos registradores r12 e r13
@@ -29,15 +29,15 @@ main:
 
 leitura:
     # pede para o usuário digitar
-	movq $prompt, %rdi
-	movq $0, %rax
-	call printf
+    movq $prompt, %rdi
+    movq $0, %rax
+    call printf
 
     # lê a entrada do usuário
     leaq -4(%rbp), %rsi
-	movq $scanFmt, %rdi
-	movq $0, %rax
-	call scanf
+    movq $scanFmt, %rdi
+    movq $0, %rax
+    call scanf
 
     # sai do loop se o valor lido for -1
     cmpl $-1, -4(%rbp)
@@ -58,9 +58,9 @@ leitura:
 fim:
     # imprime a soma
     movl %r12d, %esi
-	movq $resultFmt, %rdi
-	movq $0, %rax
-	call printf
+    movq $resultFmt, %rdi
+    movq $0, %rax
+    call printf
 
     # imprime que a média não se aplica se o contador for zero
     cmpl $0, %r13d
@@ -73,16 +73,16 @@ fim:
 
     # imprime a média
     movq $mediaFmt, %rdi
-	movq $1, %rax
-	call printf
+    movq $1, %rax
+    call printf
 
     # termina o programa
     jmp epilogo
 
 mediaNA:
     movq $mediaNAFmt, %rdi
-	movq $0, %rax
-	call printf
+    movq $0, %rax
+    call printf
 
 epilogo:
     # volta os registradores r12 e r13 aos valores antigos
@@ -90,6 +90,6 @@ epilogo:
     movq -20(%rbp), %r13
 
     movq $0, %rax
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret

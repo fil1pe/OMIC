@@ -5,7 +5,7 @@
 pow:
     # prólogo
     pushq %rbp
-	movq %rsp, %rbp
+    movq %rsp, %rbp
 
     movq $1, %rcx   # armazena o resultado
 pow_loop:
@@ -26,6 +26,6 @@ pow_fim:
     movq %rcx, %rax
 
     # epílogo
-	movq %rbp, %rsp
-	popq %rbp
-	ret
+    movq %rbp, %rsp
+    popq %rbp
+    ret
