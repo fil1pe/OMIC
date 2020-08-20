@@ -1,0 +1,7 @@
+unsigned_int.elf
+	tamanho do arquivo: 4,0 kB
+	memória de programa consumida: 5%
+
+double.elf
+	tamanho do arquivo: 7,3 kB
+	memória de programa consumida: 48%
